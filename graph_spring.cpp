@@ -6,7 +6,7 @@
 #include <time.h>   /* time */
 #include <Vector2.h>
 #include <Utility.h>
-#include <GraphFactory.h>
+#include <RandomGraphFactory.h>
 #include <boost/graph/adjacency_list.hpp> 
 
 #define RENDER_SCALE 10
@@ -170,6 +170,7 @@ void initializeFontAndText(sf::Font &font, sf::Text&text) {
 
 int main() {
 	int iterations = 0;
+  int step = 50;
   srand(time(NULL));
   sf::View graphView;
   sf::View statusView;
@@ -181,7 +182,7 @@ int main() {
 	sf::Text text;
 	initializeFontAndText(font, text);
 
-	GraphFactory graphFactory;
+	RandomGraphFactory graphFactory;
 	graphFactory.setDefaultNumVectors(100);
 	graphFactory.setDefaultEdgesPerVector(1.25);
 	Graph g = graphFactory.generate();
@@ -203,21 +204,23 @@ int main() {
 						g = graphFactory.generate();
 						initialize_vertex_position(g);
     				iterations = 0;	
-    			} else if (event.key.code == sf::Keyboard::Add) {
+    			} else if (event.key.code == sf::Keyboard::Add || event.key.code == sf::Keyboard::Equal) {
 //    				sf::View view = window.getView();
 //						view.zoom(0.5f);
 //						window.setView(view);
 						graphView.zoom(0.5f);
-    			} else if (event.key.code == sf::Keyboard::Subtract) {
+                                                step = step / 2;
+    			} else if (event.key.code == sf::Keyboard::Subtract || event.key.code == sf::Keyboard::Dash) {
 						graphView.zoom(2.0f);
+                                                step = step * 2;
     			} else if (event.key.code == sf::Keyboard::Up) {
-						graphView.move(0, -50);
+						graphView.move(0, 0 - step);
     			} else if (event.key.code == sf::Keyboard::Down) {
-						graphView.move(0, 50);
+						graphView.move(0, step);
     			} else if (event.key.code == sf::Keyboard::Left) {
-						graphView.move(-50, 0);
+						graphView.move(0 - step, 0);
     			} else if (event.key.code == sf::Keyboard::Right) {
-						graphView.move(50, 0);
+						graphView.move(step, 0);
     			} else if (event.key.code == sf::Keyboard::Numpad2) {
 						graphFactory.setDefaultNumVectors(graphFactory.defaultNumVectors() - 5);
 						g = graphFactory.generate();

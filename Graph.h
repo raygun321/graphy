@@ -9,6 +9,7 @@ struct VertexProperty
 {
   char label;
   Vector2d position;
+  sf::Color color;
 };
 
 // Edge Properties
