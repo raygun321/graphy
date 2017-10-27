@@ -1,0 +1,5 @@
+# S is starting node
+# L is a dungeon area (Level)
+S = L + L
+L = L + L
+L1 + L2 = L1[L3] + L2 + L3
