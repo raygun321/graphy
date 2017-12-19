@@ -1,6 +1,6 @@
-# Shitty Dungeon Generator
+# Mediocre 3D Engine
 
-This is my initial stab at a dungeon generator in C++.  It uses sfml.  I'm doing most of my work on a mac, you might want totoo.
+This is my initial stab at a 3D engine in C++.  It uses SFML, OpenGL, Boost, and GLM.  This seems to work on my mac with no guarantees elsewhere.
 
 ## Getting Started
 
@@ -27,53 +27,39 @@ sudo apt-get install libsfml-dev
 * Clone the repository
 
 ```
-git clone git@bitbucket.org:joecodemonkey/dungeon.git
+git clone https://github.com/raygun321/graphy.git
 ```
 
-* Build the unit tests
-```
-cd dungeon
-./mac_tests.sh
-```
+## Modules
 
-* Build the generator
-```
-./mac_build.sh
-./dungen
-```
+* common
 
-## Classes
+Code used across projects that didn't make it in the engine
 
-### Vector2
+* engine
 
-This is the template for the vectors I'm using to represent every location in the dungeon.   The squares in the dungeon are Vector2i (integer), but distances are measured in Vector2d (double)
+The work in progress 3d engine.
 
-### Tile
+* cube
 
-This is the lowest level of the dungeon.  Every square in a dungeon is a tile.  I could have used polymorphism here, but I thought it was overkill.
+An example showing a cube.
 
-### Dungeon
+* irrlicht
 
-Basically a vector of vector of Tiles.  I'm thinking more and more of the dungeon should live in the DungeonFactory which creates the dungeon.  Eventually, the dungeon should contain the state for the game (all items, mobs, etc in the dungeon)
+An attempt a using irrlicht. I'm not sure this works.
 
-###  Room
+* springs
 
-The idea was that room would be a class representing a room in the dungeon.  Now I'm starting to think it will be part of DungeonFactory only b/c we never care about room again after the dungeon has been generated.  I haven't moved it yet though as I'm not sure.
+2D graph-spring example using SFML
 
-###  DungeonFactory
+* springs3d
 
-This is the magical dungeon generator.  It's a work in progress.  I've got rooms being generated, but digging tunnels is making me question my choices in life.  I'm getting there though.  
+3D version on the graph spring code using the engine.
 
+* triangle
 
-### Utility
+Basic triangle example
 
-A catch all with static methods that exists primarily to keep me from filling like a sloppy asshole.
+* Tutorial
 
-
-### Future Classes
-
-* DungeonMaster - This class would own the game loop.  I just like the name though as it makes me feel clever.
-
-* Player - This is the player's class (Class as in C++, not as in Fighter/Mage).  I've not thought it out much.
-
-* Monster - 
+An evolving example using parts of the engine. Currently displays a rotating textured model loaded from an OBJ file.
