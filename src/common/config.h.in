@@ -1,0 +1,4 @@
+#define graphy_VERSION_MAJOR @graphy_VERSION_MAJOR@
+#define graphy_VERSION_MINOR @graphy_VERSION_MINOR@
+
+#define graphy_RESOURCE_PATH "@CMAKE_SOURCE_DIR@"

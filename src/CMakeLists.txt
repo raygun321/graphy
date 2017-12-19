@@ -1,0 +1,10 @@
+include_directories(common engine)
+add_subdirectory(common)
+add_subdirectory(springs)
+add_subdirectory(springs3d)
+add_subdirectory(lsystem)
+add_subdirectory(cube)
+add_subdirectory(triangle)
+add_subdirectory(engine)
+add_subdirectory(tutorial)
+
