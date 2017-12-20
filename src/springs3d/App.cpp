@@ -2,7 +2,7 @@
 #include <OpenGL/gl3.h>
 
 #include <iostream>
-#include "Texture.h"
+#include "ModelTexture.h"
 #include "OBJLoader.h"
 
 #include "Utility.h"
@@ -67,7 +67,7 @@ void App::initSystems() {
     cubeTexturePath += "/resources/cube.png";
 
     RawModel_ptr rModel = OBJLoader::loadObjModel(sphereModelPath, _loader);
-    Texture_ptr texture = _loader.loadTexture(sphereTexturePath);
+    ModelTexture_ptr texture = _loader.loadTexture(sphereTexturePath);
     _nodeModel = std::make_shared<TexturedModel>(rModel, texture);
     
     rModel = OBJLoader::loadObjModel(cubeModelPath, _loader);
@@ -160,7 +160,7 @@ void App::appLoop() {
 
         // Draw...
         for(int i = 0; i < _entities.size(); ++i) {
-          _renderer->render(_entities[i], _shader->getTransformationMatrixLocation(), _shader);
+          _renderer->render(_entities[i], _shader);
         }
         _shader->stop();
 

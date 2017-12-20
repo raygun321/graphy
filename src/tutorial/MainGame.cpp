@@ -2,7 +2,7 @@
 #include <OpenGL/gl3.h>
 
 #include <iostream>
-#include "Texture.h"
+#include "ModelTexture.h"
 #include "OBJLoader.h"
 
 #include "config.h"
@@ -53,15 +53,17 @@ void MainGame::initSystems() {
     // Prepare OpenGL
     glEnable(GL_TEXTURE_2D);
     std::string modelPath = graphy_RESOURCE_PATH;
-    modelPath += "/resources/stall.obj";
+    modelPath += "/resources/dragon.obj";
     std::string texturePath = graphy_RESOURCE_PATH;
-    texturePath += "/resources/stallTexture_preview.png";
+    texturePath += "/resources/cube.png";
 
     RawModel_ptr rModel = OBJLoader::loadObjModel(modelPath, _loader);
-    Texture_ptr texture = _loader.loadTexture(texturePath);
+    ModelTexture_ptr texture = _loader.loadTexture(texturePath);
+    texture->setShineDamper(10);
+    texture->setReflectivity(1);
     TexturedModel_ptr tModel = std::make_shared<TexturedModel>(rModel, texture);
     
-    _entity = std::make_shared<Entity>(tModel, glm::vec3(0, 0, -20), glm::vec3(0, 0, 0), 1.0f);
+    _entity = std::make_shared<Entity>(tModel, glm::vec3(0, 0, -25), glm::vec3(0, 0, 0), 1.0f);
     
     _shader = std::make_shared<StaticShader>();
     _shader->init();
@@ -71,6 +73,7 @@ void MainGame::initSystems() {
                                            _shader);
     
     _camera = std::make_shared<Camera>();
+    _light = std::make_shared<Light>(glm::vec3(0,4,-20), glm::vec3(1, .9, .9));
     
     // Main View
     float y_ratio = (_windowSizeY - 50) / _windowSizeY;
@@ -107,8 +110,8 @@ void MainGame::gameLoop() {
         processInput();
         
         // Game Logic
-        _entity->increasePosition(0, 0, -0.001);
-        _entity->increaseRotation(.001, .002, 0);
+        //_entity->increasePosition(0, 0, -0.001);
+        _entity->increaseRotation(0.001, .005, 0);
 
         // SFML... Activate the window
 //        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -120,9 +123,10 @@ void MainGame::gameLoop() {
         _renderer->prepare();
         _shader->start();
         _shader->loadViewMatrix(_camera);
+        _shader->loadLight(_light);
 
         // Draw...
-        _renderer->render(_entity, _shader->getTransformationMatrixLocation(), _shader);
+        _renderer->render(_entity, _shader);
         _shader->stop();
 
         // SFML... Draw and Deactivate

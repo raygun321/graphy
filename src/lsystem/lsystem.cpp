@@ -11,6 +11,7 @@
 #include <boost/utility.hpp>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/algorithm/string/replace.hpp>
+#include "config.h"
 
 
 std::ostream & operator<<(std::ostream & out, const Vector2d & v) {
@@ -29,7 +30,10 @@ void initializeViews(sf::RenderWindow &window, sf::View &graphView, sf::View &st
 }
 
 void initializeFontAndText(sf::Font &font, sf::Text&text) {
-	if(!font.loadFromFile("resources/Verdana.ttf")) {
+    std::string fontPath = graphy_RESOURCE_PATH;
+    fontPath += "/resources/Verdana.ttf";
+
+	if(!font.loadFromFile(fontPath)) {
 		std::cout << "Error loading font" << std::endl;
 		exit(-1);
 	}

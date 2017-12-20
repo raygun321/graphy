@@ -1,8 +1,8 @@
 #include "TexturedModel.h"
 
-TexturedModel::TexturedModel(RawModel_ptr model, Texture_ptr texture) {
+TexturedModel::TexturedModel(RawModel_ptr model, ModelTexture_ptr texture) {
   _model = model;
-  _texture = texture;
+  _modelTexture = texture;
 }
   
 TexturedModel::~TexturedModel() {
@@ -16,10 +16,10 @@ void TexturedModel::setModel(RawModel_ptr model) {
   _model = model;
 }
 
-Texture_ptr TexturedModel::getTexture() {
-  return _texture;
+ModelTexture_ptr TexturedModel::getModelTexture() {
+  return _modelTexture;
 }
 
-void TexturedModel::setTexture(Texture_ptr texture) {
- _texture = texture;
+void TexturedModel::setModelTexture(ModelTexture_ptr texture) {
+ _modelTexture = texture;
 }

@@ -7,7 +7,8 @@
 #include "Vector2.h"
 #include "Utility.h"
 #include "RandomGraphFactory.h"
-#include <boost/graph/adjacency_list.hpp> 
+#include <boost/graph/adjacency_list.hpp>
+#include "config.h"
 
 #define RENDER_SCALE 10
 
@@ -157,7 +158,10 @@ void initializeViews(sf::RenderWindow &window, sf::View &graphView, sf::View &st
 }
 
 void initializeFontAndText(sf::Font &font, sf::Text&text) {
-	if(!font.loadFromFile("resources/Verdana.ttf")) {
+    std::string fontPath = graphy_RESOURCE_PATH;
+    fontPath += "/resources/Verdana.ttf";
+
+	if(!font.loadFromFile(fontPath)) {
 		std::cout << "Error loading font" << std::endl;
 		exit(-1);
 	}

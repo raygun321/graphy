@@ -11,7 +11,7 @@ public:
   
   void prepare();
   
-  void render(Entity_ptr entity, GLuint location, ShaderProgram_ptr shader);
+  void render(Entity_ptr entity, ShaderProgram_ptr shader);
   
 private:
   void createProjectionMatrix(float aspectRatio);

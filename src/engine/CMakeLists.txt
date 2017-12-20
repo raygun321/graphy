@@ -1,5 +1,5 @@
 
-set(SOURCES Camera.cpp Camera.h Entity.cpp Entity.h Loader.cpp Loader.h OBJLoader.cpp OBJLoader.h RawModel.cpp RawModel.h Renderer.cpp Renderer.h ShaderProgram.cpp ShaderProgram.h State.h TexturedModel.cpp TexturedModel.h Util.cpp Util.h VAO.cpp VAO.h VBO.cpp VBO.h)
+set(SOURCES Camera.cpp Camera.h Entity.cpp Entity.h Light.cpp Light.h Loader.cpp Loader.h ModelTexture.cpp ModelTexture.h OBJLoader.cpp OBJLoader.h RawModel.cpp RawModel.h Renderer.cpp Renderer.h ShaderProgram.cpp ShaderProgram.h State.h TexturedModel.cpp TexturedModel.h Util.cpp Util.h VAO.cpp VAO.h VBO.cpp VBO.h)
 
 add_library(engine ${SOURCES})
 

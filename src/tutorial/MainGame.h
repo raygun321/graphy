@@ -8,6 +8,7 @@
 #include "Entity.h"
 #include "StaticShader.h"
 #include "Camera.h"
+#include "Light.h"
 
 enum class GameState { PLAY, EXIT };
 
@@ -27,6 +28,7 @@ private:
     Entity_ptr _entity;
     StaticShader_ptr _shader;
     Camera_ptr _camera;
+    Light_ptr _light;
     
     GameState _gameState;
     int _windowSizeX, _windowSizeY;

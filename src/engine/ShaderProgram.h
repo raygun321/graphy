@@ -7,6 +7,9 @@
 #include <memory>
 #include <string>
 
+#include "Camera.h"
+#include "Light.h"
+
 class ShaderProgram {
 public:
   ShaderProgram(std::string vertexFile, std::string fragmentFile);
@@ -30,6 +33,12 @@ public:
   void loadUniform(GLuint location, bool value);
   void loadUniform(GLuint location, glm::vec3 value);
   void loadUniform(GLuint location, glm::mat4 value);
+  
+  virtual void loadTransformationMatrix(glm::mat4 matrix) = 0;
+  virtual void loadProjectionMatrix(glm::mat4 matrix) = 0;
+  virtual void loadViewMatrix(Camera_ptr camera) = 0;
+  virtual void loadLight(Light_ptr light) = 0;
+  virtual void loadShineVariables(GLfloat damper, GLfloat reflectivity) = 0;
   
 private:
   int loadShader(std::string file, GLuint type);

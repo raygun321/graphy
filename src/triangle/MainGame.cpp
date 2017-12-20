@@ -2,6 +2,7 @@
 #include <OpenGL/gl3.h>
 
 #include <iostream>
+#include "config.h"
 
 MainGame::MainGame() {
     _gameState = GameState::PLAY;
@@ -95,7 +96,10 @@ void MainGame::initSystems() {
     _statusBarView.setViewport(sf::FloatRect(0, y_ratio, 1, 1.0 - y_ratio));
     
     // Font
-    if(!_font.loadFromFile("resources/Verdana.ttf")) {
+    std::string fontPath = graphy_RESOURCE_PATH;
+    fontPath += "/resources/Verdana.ttf";
+
+    if(!_font.loadFromFile(fontPath)) {
         std::cout << "Error loading font" << std::endl;
         exit(-1);
 		}

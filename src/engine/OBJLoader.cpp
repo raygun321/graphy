@@ -111,6 +111,6 @@ RawModel_ptr OBJLoader::loadObjModel(std::string fileName, Loader & loader) {
     indices.push_back(cur_idx);
 	}
 	
-	return loader.loadToVAO(indices,out_vertices,out_textures);
+	return loader.loadToVAO(indices,out_vertices,out_textures, out_normals);
 }
 

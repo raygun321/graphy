@@ -1,25 +1,25 @@
 #pragma once
 
 #include "RawModel.h"
-#include "Texture.h"
+#include "ModelTexture.h"
 #include <memory>
 
 class TexturedModel {
 public:
 
-  TexturedModel(RawModel_ptr, Texture_ptr);
+  TexturedModel(RawModel_ptr, ModelTexture_ptr);
   
   ~TexturedModel();
   
   RawModel_ptr getModel();
   void setModel(RawModel_ptr);
 
-  Texture_ptr getTexture();
-  void setTexture(Texture_ptr);
+  ModelTexture_ptr getModelTexture();
+  void setModelTexture(ModelTexture_ptr);
   
 private:
   RawModel_ptr _model;
-  Texture_ptr _texture;
+  ModelTexture_ptr _modelTexture;
 };
 
 typedef std::shared_ptr<TexturedModel> TexturedModel_ptr;

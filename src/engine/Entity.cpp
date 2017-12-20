@@ -74,9 +74,8 @@ void Entity::increasePosition(float dx, float dy, float dz) {
 
 void Entity::increaseRotation(float dx, float dy, float dz) {
     _dirtyMatrix = true;
-    _rotation[0] += dx;
-    _rotation[1] += dy;
-    _rotation[2] += dz;
+    glm::quat deltaRot = glm::quat(glm::vec3(dx, dy, dz));
+    _rotation *= deltaRot;
 }
 
 void Entity::increaseScale(float delta) {

@@ -58,28 +58,7 @@ glm::mat4 Util::createViewMatrix(glm::vec3 &translation, glm::vec3 &rotation) {
 }
 
 glm::vec3 Util::toEulerAngle(const glm::quat& q) {
-    double roll = glm::roll(q);
-    double pitch = glm::pitch(q);
-    double yaw = glm::yaw(q);
-    
-	// roll (x-axis rotation)
-	double sinr = +2.0 * (q.w * q.x + q.y * q.z);
-	double cosr = +1.0 - 2.0 * (q.x * q.x + q.y * q.y);
-	roll = atan2(sinr, cosr);
-
-	// pitch (y-axis rotation)
-	double sinp = +2.0 * (q.w * q.y - q.z * q.x);
-	if (fabs(sinp) >= 1)
-		pitch = copysign(M_PI / 2, sinp); // use 90 degrees if out of range
-	else
-		pitch = asin(sinp);
-
-	// yaw (z-axis rotation)
-	double siny = +2.0 * (q.w * q.z + q.x * q.y);
-	double cosy = +1.0 - 2.0 * (q.y * q.y + q.z * q.z);
-	yaw = atan2(siny, cosy);
-	
-	return glm::vec3(roll, pitch, yaw);
+	return glm::eulerAngles(q); // pitch, yaw, roll
 }
 
 
@@ -127,22 +106,7 @@ void Util::getRotation(const glm::mat4 &transMatrix, glm::vec3 & rotation)
     float pitch = glm::pitch(q);
     float roll = glm::roll(q);
 
-    /*
-    if (transMatrix[0][0] == 1.0f) {
-        yaw = atan2f(transMatrix[0][2], transMatrix[2][3]);
-        pitch = 0;
-        roll = 0;
-        
-    } else if (transMatrix[0][0] == -1.0f) {
-        yaw = atan2f(transMatrix[0][2], transMatrix[2][3]);
-        pitch = 0;
-        roll = 0;
-    } else {
-        yaw = atan2(- transMatrix[2][0],transMatrix[0][0]);
-        pitch = asin(transMatrix[1][0]);
-        roll = atan2(- transMatrix[1][2],transMatrix[1][1]);
-    } */
-    rotation.x = yaw * 180 / M_PI;
-    rotation.y = pitch * 180 / M_PI;
-    rotation.z = roll * 180 / M_PI;
+    rotation.x = pitch;
+    rotation.y = yaw;
+    rotation.z = roll;
 }

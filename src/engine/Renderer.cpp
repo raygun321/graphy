@@ -18,16 +18,18 @@ void Renderer::prepare() {
   //glClearColor(0, 0, 0, 1);
 }
 
-void Renderer::render(Entity_ptr entity, GLuint location, ShaderProgram_ptr shader) {
+void Renderer::render(Entity_ptr entity, ShaderProgram_ptr shader) {
   TexturedModel_ptr model = entity->getModel();
   RawModel_ptr raw = model->getModel();
-  Texture_ptr texture = model->getTexture();
+  ModelTexture_ptr modelTexture = model->getModelTexture();
+  Texture_ptr texture = modelTexture->getTexture();
     
   sf::Texture::bind(&(*texture));
     
   VAO_ptr vao = raw->getVAO();
   vao->enable();
-  shader->loadUniform(location, entity->getTranslationMatrix());
+  shader->loadTransformationMatrix(entity->getTranslationMatrix());
+  shader->loadShineVariables(modelTexture->getShineDamper(), modelTexture->getReflectivity());
 
   glDrawElements(GL_TRIANGLES, raw->getVertexCount(), GL_UNSIGNED_INT, 0);
     

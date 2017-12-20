@@ -22,6 +22,9 @@ public:
   void loadViewMatrix(Camera_ptr camera);
   GLuint getViewMatrixLocation() { return _viewMatrixLocation; };
   
+  void loadLight(Light_ptr light) {};
+  void loadShineVariables(GLfloat damper, GLfloat reflectivity) {};
+
 private:
   static std::string VERTEX_FILE;
   static std::string FRAGMENT_FILE;
